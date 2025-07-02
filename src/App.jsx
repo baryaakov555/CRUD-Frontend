@@ -2,17 +2,21 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import "./AppStyles.css";
 import NavBar from "./components/NavBar";
-import { BrowserRouter as Router, Routes } from "react-router";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const App = () => {
+
+
+
   return (
     <div>
       <NavBar />
       <div className="app">
-        <h1>Hello React!</h1>
-        <img className="react-logo" src="/react-logo.svg" alt="React Logo" />
-
-        <Routes>{/* Currently, we don't have any routes defined */}</Routes>
+        <h1>CRUD APP!</h1>
+        <Routes>
+          <Route path="/campuses" element={<div>All Campuses </div>}></Route>
+          <Route path="/students" element={<div>All Students </div>}></Route>
+        </Routes>
       </div>
     </div>
   );
