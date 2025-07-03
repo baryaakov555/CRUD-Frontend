@@ -5,6 +5,7 @@ import "./NavBarStyles.css";
 const NavBar = () => {
   return (
     <nav className="navbar">
+      <Link to="/">Home</Link>
       <Link to="/campuses">Campuses</Link>
       <Link to="/students">Students</Link>
     </nav>

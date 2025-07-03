@@ -4,21 +4,40 @@ import "./AppStyles.css";
 import NavBar from "./components/NavBar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Campus from "./components/campus";
+import Student from "./components/student";
+
 
 const App = () => {
-
-
-
   return (
     <div>
       <NavBar />
       <div className="app">
-        <h1>CRUD APP!</h1>
         <Routes>
-          <Route path="/campuses" element={<div>All Campuses </div>}></Route>
-          <Route path="/students" element={<div>All Students </div>}></Route>
+          <Route
+            path="/"
+            element={<h1>Home Page</h1>}
+          />
+
+          <Route
+            path="/campuses"
+            element={
+              <>
+                <h1>All Campuses</h1>
+                <Campus />
+              </>
+            }
+          />
+
+          <Route
+            path="/students"
+            element={
+              <>
+                <h1>All Students</h1>
+                <Student />
+              </>
+            }
+          />
         </Routes>
-        <Campus />
       </div>
     </div>
   );

@@ -1,14 +1,36 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
-import "./NavBarStyles.css";
+import "./student.css";
 
-const NavBar = () => {
+const Student = () => {
+  const [Students, setStudents] = useState([]);
+
+  const getAllStudents = async () => {
+    try {
+      const getStudents = await axios.get(
+        "http://localhost:8080/api/students"
+      );
+      setStudents(getStudents.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    getAllStudents();
+  }, []);
+  console.log("Studnets from API:", Students);
+
   return (
-    <nav className="navbar">
-      <Link to="/campuses">Campuses</Link>
-      <Link to="/students">Students</Link>
-    </nav>
+    <div>
+      <ul>
+        {Students.map((student) => (
+          <li>{student.name}</li>
+        ))}
+      </ul>
+    </div>
   );
 };
 
-export default NavBar;
+export default Student;
