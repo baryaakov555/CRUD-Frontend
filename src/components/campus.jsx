@@ -8,9 +8,7 @@ const Campus = () => {
 
   const getAllCampuses = async () => {
     try {
-      const getCampuses = await axios.get(
-        "http://localhost:8080/api/campuses"
-      );
+      const getCampuses = await axios.get("http://localhost:8080/api/campuses");
       setCampuses(getCampuses.data);
     } catch (err) {
       console.error(err);
@@ -24,11 +22,15 @@ const Campus = () => {
 
   return (
     <div>
-      <ul>
-        {campuses.map((campus) => (
-          <li>{campus.name}</li>
-        ))}
-      </ul>
+      {campuses.length === 0 ? (
+        <p>There are no campuses in the database</p>
+      ) : (
+        <ul>
+          {campuses.map((campus) => (
+            <li>{campus.name}</li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
