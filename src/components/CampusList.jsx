@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./CampusList.css";
+import { useNavigate } from "react-router-dom";
 
 const Campus = () => {
   const [campuses, setCampuses] = useState([]);
+  const navigate = useNavigate();
 
   const getAllCampuses = async () => {
     try {
@@ -38,9 +40,20 @@ const Campus = () => {
       ) : (
         <ul className="campus-list">
           {campuses.map((campus) => (
-            <li key={campus.id} className="campus-item">
+            <li
+              key={campus.id}
+              className="campus-item"
+              onClick={() => navigate(`/campuses/${campus.id}`)}
+            >
               {campus.name}
-              <p onClick={() => handleDelete(campus.id)}>🗑️</p>
+              <p
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleDelete(campus.id);
+                }}
+              >
+                🗑️
+              </p>
             </li>
           ))}
         </ul>
