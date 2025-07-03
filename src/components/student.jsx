@@ -1,0 +1,14 @@
+import React from "react";
+import { Link } from "react-router-dom";
+import "./NavBarStyles.css";
+
+const NavBar = () => {
+  return (
+    <nav className="navbar">
+      <Link to="/campuses">Campuses</Link>
+      <Link to="/students">Students</Link>
+    </nav>
+  );
+};
+
+export default NavBar;
