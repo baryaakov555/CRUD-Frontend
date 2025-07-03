@@ -3,26 +3,24 @@ import { createRoot } from "react-dom/client";
 import "./AppStyles.css";
 import NavBar from "./components/NavBar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Campus from "./components/campus";
+import Campus from "./components/CampusList";
 import Student from "./components/student";
-
+import AddCampus from "./components/addCampus";
 
 const App = () => {
   return (
-    <div>
+    <div className="app-container">
       <NavBar />
-      <div className="app">
+      <div className="app-content">
         <Routes>
-          <Route
-            path="/"
-            element={<h1>Home Page</h1>}
-          />
+          <Route path="/" element={<h1 className="page-title">Home Page</h1>} />
 
           <Route
             path="/campuses"
             element={
               <>
-                <h1>All Campuses</h1>
+                <h1 className="page-title">All Campuses</h1>
+                <AddCampus />
                 <Campus />
               </>
             }
@@ -32,7 +30,7 @@ const App = () => {
             path="/students"
             element={
               <>
-                <h1>All Students</h1>
+                <h1 className="page-title">All Students</h1>
                 <Student />
               </>
             }
@@ -43,10 +41,6 @@ const App = () => {
   );
 };
 
-// We're using React Router to handle the navigation between pages.
-// It's important that the Router is at the top level of our app,
-// and that we wrap our entire app in it. With this in place, we can
-// declare Routes, Links, and use useful hooks like useNavigate.
 const root = createRoot(document.getElementById("root"));
 root.render(
   <Router>

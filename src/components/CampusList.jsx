@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import "./campus.css";
+import "./CampusList.css";
 
 const Campus = () => {
   const [campuses, setCampuses] = useState([]);
 
   const getAllCampuses = async () => {
     try {
-      const getCampuses = await axios.get("http://localhost:8080/api/campuses");
-      setCampuses(getCampuses.data);
+      const response = await axios.get("http://localhost:8080/api/campuses");
+      setCampuses(response.data);
     } catch (err) {
       console.error(err);
     }
@@ -18,16 +17,17 @@ const Campus = () => {
   useEffect(() => {
     getAllCampuses();
   }, []);
-  console.log("Campuses from API:", campuses);
 
   return (
-    <div>
+    <div className="campus-container">
       {campuses.length === 0 ? (
-        <p>There are no campuses in the database</p>
+        <p className="no-campus">There are no campuses in the database.</p>
       ) : (
-        <ul>
-          {campuses.map((campus) => (
-            <li>{campus.name}</li>
+        <ul className="campus-list">
+          {campuses.map((campus, index) => (
+            <li key={index} className="campus-item">
+              {campus.name}
+            </li>
           ))}
         </ul>
       )}

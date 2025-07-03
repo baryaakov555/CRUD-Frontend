@@ -8,9 +8,7 @@ const Student = () => {
 
   const getAllStudents = async () => {
     try {
-      const getStudents = await axios.get(
-        "http://localhost:8080/api/students"
-      );
+      const getStudents = await axios.get("http://localhost:8080/api/students");
       setStudents(getStudents.data);
     } catch (err) {
       console.error(err);
