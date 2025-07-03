@@ -4,9 +4,10 @@ import "./AppStyles.css";
 import NavBar from "./components/NavBar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Campus from "./components/CampusList";
-import Student from "./components/student";
+import Student from "./components/AddStudent";
 import AddCampus from "./components/addCampus";
 import SingleCampus from "./components/SingleCampus";
+import AddStudent from "./components/AddStudent";
 
 const App = () => {
   return (
@@ -28,16 +29,14 @@ const App = () => {
           />
 
           <Route
-            path="/students"
+            path="/campuses/:id"
             element={
               <>
-                <h1 className="page-title">All Students</h1>
-                <Student />
+                <SingleCampus />
+                <AddStudent />
               </>
             }
           />
-
-          <Route path="/campuses/:id" element={<SingleCampus />} />
         </Routes>
       </div>
     </div>

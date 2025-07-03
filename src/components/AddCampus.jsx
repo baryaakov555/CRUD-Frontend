@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./addCampus.css";
 import { useNavigate } from "react-router-dom";
+import "./AddCampus.css";
 
 const AddCampus = () => {
   const [name, setName] = useState("");
