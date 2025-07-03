@@ -7,10 +7,12 @@ const Campus = () => {
 
   const getAllCampuses = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/campuses");
-      setCampuses(response.data);
-    } catch (err) {
-      console.error(err);
+      const getAllCampuses = await axios.get(
+        "http://localhost:8080/api/campuses"
+      );
+      setCampuses(getAllCampuses.data);
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -18,15 +20,27 @@ const Campus = () => {
     getAllCampuses();
   }, []);
 
+  const handleDelete = async (id) => {
+    try {
+      const deleteCampus = await axios.delete(
+        `http://localhost:8080/api/campuses/${id}`
+      );
+      await getAllCampuses();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="campus-container">
       {campuses.length === 0 ? (
         <p className="no-campus">There are no campuses in the database.</p>
       ) : (
         <ul className="campus-list">
-          {campuses.map((campus, index) => (
-            <li key={index} className="campus-item">
+          {campuses.map((campus) => (
+            <li key={campus.id} className="campus-item">
               {campus.name}
+              <p onClick={() => handleDelete(campus.id)}>🗑️</p>
             </li>
           ))}
         </ul>

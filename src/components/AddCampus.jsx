@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./addCampus.css";
+import { useNavigate } from "react-router-dom";
 
 const AddCampus = () => {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const navigate = useNavigate();
 
   const postCampus = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("http://localhost:8080/api/campuses", {
+      const newCampus = await axios.post("http://localhost:8080/api/campuses", {
         name,
         address,
         description,
@@ -22,6 +24,8 @@ const AddCampus = () => {
       setAddress("");
       setDescription("");
       setImageUrl("");
+
+      navigate(`/campuses/${newCampus.data.id}`);
     } catch (error) {
       console.error(error);
     }

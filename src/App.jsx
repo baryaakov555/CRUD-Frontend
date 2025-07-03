@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Campus from "./components/CampusList";
 import Student from "./components/student";
 import AddCampus from "./components/addCampus";
+import SingleCampus from "./components/SingleCampus";
 
 const App = () => {
   return (
@@ -35,6 +36,8 @@ const App = () => {
               </>
             }
           />
+
+          <Route path="/campuses/:id" element={<SingleCampus />} />
         </Routes>
       </div>
     </div>
