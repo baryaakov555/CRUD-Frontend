@@ -9,6 +9,7 @@ const AddStudent = () => {
   const [email, setEmail] = useState("");
   const [gpa, setGpa] = useState(0.0);
   const [imageUrl, setImageUrl] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -34,6 +35,9 @@ const AddStudent = () => {
 
       navigate(`/students/${id}`);
     } catch (error) {
+      if (error.response.data.error) {
+        setErrorMessage("Please enter a valid email address");
+      }
       console.error(error);
     }
   };
@@ -41,7 +45,6 @@ const AddStudent = () => {
   return (
     <form onSubmit={postStudent}>
       <h2>Add New Student</h2>
-
       <label>Name</label>
       <input
         id="name"
@@ -51,8 +54,8 @@ const AddStudent = () => {
         placeholder="Student Name"
         required
       />
-
       <label htmlFor="email">Email</label>
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
       <input
         id="email"
         type="text"
@@ -61,7 +64,6 @@ const AddStudent = () => {
         placeholder="email"
         required
       />
-
       <label htmlFor="gpa">gpa</label>
       <input
         id="gpa"
@@ -73,7 +75,6 @@ const AddStudent = () => {
         min="0"
         max="4"
       />
-
       <label htmlFor="imageUrl">Image URL</label>
       <input
         id="imageUrl"
@@ -82,7 +83,6 @@ const AddStudent = () => {
         onChange={(e) => setImageUrl(e.target.value)}
         placeholder="https://example.com/image.jpg"
       />
-
       <button type="submit">Add Student</button>
     </form>
   );
