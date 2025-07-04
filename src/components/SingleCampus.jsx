@@ -26,10 +26,10 @@ const SingleCampus = () => {
     getSingleCampus(id);
   }, []);
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (studentId) => {
     try {
       const deleteStudent = await axios.delete(
-        `http://localhost:8080/api/students/${id}`
+        `http://localhost:8080/api/students/${studentId}`
       );
       await getSingleCampus(id);
     } catch (error) {
@@ -94,7 +94,7 @@ const SingleCampus = () => {
         )}
       </div>
       {showForm === true ? (
-        <AddStudent />
+        <AddStudent refreshCampus={() => getSingleCampus(id)} />
       ) : (
         <button className="toggle-campus-button" onClick={handleShowForm}>
           Add Student

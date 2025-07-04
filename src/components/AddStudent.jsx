@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import "./AddStudent.css";
 
-const AddStudent = () => {
+const AddStudent = ({ refreshCampus }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [gpa, setGpa] = useState(0.0);
@@ -27,6 +27,8 @@ const AddStudent = () => {
           campusId: id,
         }
       );
+
+      refreshCampus();
 
       setName("");
       setEmail("");
