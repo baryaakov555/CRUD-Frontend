@@ -1,11 +1,15 @@
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import "./SingleCampus.css"; // make sure this is present
+import "./SingleCampus.css";
+import SingleStudent from "./SingleStudent";
+import AddStudent from "./AddStudent";
 
 const SingleCampus = () => {
   const [campus, setCampus] = useState(null);
+  const [showForm, setShowForm] = useState(false);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const getSingleCampus = async (id) => {
     try {
@@ -21,6 +25,21 @@ const SingleCampus = () => {
   useEffect(() => {
     getSingleCampus(id);
   }, []);
+
+  const handleDelete = async (id) => {
+    try {
+      const deleteStudent = await axios.delete(
+        `http://localhost:8080/api/students/${id}`
+      );
+      await getSingleCampus(id);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleShowForm = () => {
+    setShowForm(true);
+  };
 
   if (!campus) return <p>Loading...</p>;
 
@@ -38,7 +57,10 @@ const SingleCampus = () => {
           <strong>Description:</strong> {campus.description}
         </p>
         <img
-          src={campus.imageUrl || "https://via.placeholder.com/150"}
+          src={
+            campus.imageUrl ||
+            "https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ="
+          }
           alt={`${campus.name}`}
           className="campus-image"
         />
@@ -51,13 +73,33 @@ const SingleCampus = () => {
         ) : (
           <div className="student-cards">
             {campus.students.map((student) => (
-              <div key={student.id} className="student-card">
-                <p className="student-name">{student.name}</p>
+              <div
+                key={student.id}
+                className="student-card"
+                onClick={() => navigate(`/students/${student.id}`)}
+              >
+                {student.name}
+                <p
+                  className="student-trash-icon"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleDelete(student.id);
+                  }}
+                >
+                  🗑️
+                </p>
               </div>
             ))}
           </div>
         )}
       </div>
+      {showForm === true ? (
+        <AddStudent />
+      ) : (
+        <button className="toggle-campus-button" onClick={handleShowForm}>
+          Add Student
+        </button>
+      )}
     </div>
   );
 };

@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./CampusList.css";
 import { useNavigate } from "react-router-dom";
+import AddCampus from "./AddCampus";
 
 const Campus = () => {
   const [campuses, setCampuses] = useState([]);
+  const [showForm, setShowForm] = useState(false);
   const navigate = useNavigate();
 
   const getAllCampuses = async () => {
@@ -33,6 +35,10 @@ const Campus = () => {
     }
   };
 
+  const handleShowForm = () => {
+    setShowForm(true);
+  };
+
   return (
     <div className="campus-container">
       {campuses.length === 0 ? (
@@ -57,6 +63,13 @@ const Campus = () => {
             </li>
           ))}
         </ul>
+      )}
+      {showForm === true ? (
+        <AddCampus />
+      ) : (
+        <button className="toggle-campus-button" onClick={handleShowForm}>
+          Add Campus
+        </button>
       )}
     </div>
   );

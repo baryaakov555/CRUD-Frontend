@@ -32,7 +32,7 @@ const AddStudent = () => {
       setGpa(0.0);
       setImageUrl("");
 
-      navigate(`/campuses/${id}`);
+      navigate(`/student/${id}`);
     } catch (error) {
       console.error(error);
     }

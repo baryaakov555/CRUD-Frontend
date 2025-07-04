@@ -47,16 +47,18 @@
 
 .student-card {
   background-color: #f4f4f4;
+  cursor: pointer;
   padding: 1rem;
   border-radius: 8px;
   min-width: 150px;
   text-align: center;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .student-card:hover {
   transform: scale(1.03);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .student-name {

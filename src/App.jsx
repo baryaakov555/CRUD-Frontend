@@ -3,11 +3,11 @@ import { createRoot } from "react-dom/client";
 import "./AppStyles.css";
 import NavBar from "./components/NavBar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Campus from "./components/CampusList";
+import CampusList from "./components/CampusList";
 import Student from "./components/AddStudent";
-import AddCampus from "./components/addCampus";
 import SingleCampus from "./components/SingleCampus";
 import AddStudent from "./components/AddStudent";
+import SingleStudent from "./components/SingleStudent";
 
 const App = () => {
   return (
@@ -22,8 +22,7 @@ const App = () => {
             element={
               <>
                 <h1 className="page-title">All Campuses</h1>
-                <AddCampus />
-                <Campus />
+                <CampusList />
               </>
             }
           />
@@ -33,7 +32,15 @@ const App = () => {
             element={
               <>
                 <SingleCampus />
-                <AddStudent />
+              </>
+            }
+          />
+
+          <Route
+            path="/students/:id"
+            element={
+              <>
+                <SingleStudent />
               </>
             }
           />
